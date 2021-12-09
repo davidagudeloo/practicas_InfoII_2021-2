@@ -5,6 +5,7 @@ using namespace std;
 //funciones
 int factorial(int num);
 bool esPrimo(int num);
+int terminosSemilla(int num);
 
 int main()
 {
@@ -247,18 +248,24 @@ int main()
         //preguntar a la profe
         case 16:{
             cout<<"Problema 16. La serie de Collatz se conforma con la siguiente regla: sea n un elemento de la serie, si n es par, el siguiente elemento es n/2, y si n es impar, el siguiente elemento es 3n+1. Escriba un programa que reciba un numero k y calcule cual es el elemento inicial j (semilla), menor que k, que produce la serie mas larga y diga cuantos terminos m tiene la serie. Tip: la serie termina al llegar a un elemento cuyo valor sea 1."<<endl;
-            int num;
+            int num, semillaMayor=1;
             cout<<"ingrese un numero:"<<endl;
             cin>>num;
-            cout<<"para la semilla "<<num<<": "<<num;
-            while(num!=1){
-                if(num%2==0){
-                    num/=2;
-                    cout<<", "<<num;
+            for(int i=num-1;i>0;i--){
+                if(terminosSemilla(i)>terminosSemilla(semillaMayor)){
+                    semillaMayor=i;
+                }
+            }
+            cout<<"La serie mas larga es con la semilla: "<<semillaMayor<<" teniendo "<<terminosSemilla(semillaMayor)<<" terminos."<<endl;
+            cout<<"para la semilla "<<semillaMayor<<": "<<num;
+            while(semillaMayor!=1){
+                if(semillaMayor%2==0){
+                    semillaMayor/=2;
+                    cout<<", "<<semillaMayor;
                 }
                 else{
-                    num=3*num+1;
-                    cout<<", "<<num;
+                    semillaMayor=3*semillaMayor+1;
+                    cout<<", "<<semillaMayor;
                 }
             }
             cout<<"."<<endl;
@@ -296,5 +303,18 @@ bool esPrimo(int num){
     else{
         return false;
     }
+}
+int terminosSemilla(int num){
+    int terminos=1;
+    while(num!=1){
+        if(num%2==0){
+            num/=2;
+        }
+        else{
+            num=3*num+1;
+        }
+        terminos++;
+    }
+    return terminos;
 }
 
