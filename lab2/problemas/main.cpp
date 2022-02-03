@@ -12,7 +12,10 @@ int longitudInt(int numero);
 void intACadena(int numero, char* cadena);
 void eliminarCharsRepetidos(char* cadena);
 int romanoAArabigo(char* romano);
-bool esMagico(char* matriz, int numElementos);
+bool esMagico(int* matriz, int numElementos);
+int raizInt(int numero);
+int numeroEstrellas(int * vector);
+void cruceRectangulos(int * dato1, int * dato2, int * cruce);
 
 int main()
 {
@@ -88,6 +91,37 @@ int main()
     case 12:{
         cout<<"Problema 12. Un cuadrado magico es una matriz de numeros enteros sin repetir, en la que la suma de los numeros en cada columna, cada fila y cada diagonal principal tienen como resultado la misma constante. Escriba un programa que permita al usuario ingresar una matriz cuadrada, imprima la matriz y verifique si la matriz es un cuadrado magico."<<endl;
         int matriz[]={4, 9, 2, 3, 5, 7, 8, 1, 6};//CADENA DE ENTRADA (Modificable)
+        int elementosMatriz=9;//elementos de la matriz (modificable)
+
+        if(esMagico(matriz, elementosMatriz)){
+            cout<<"es un cuadrado magico!"<<endl;
+        }
+        else{
+            cout<<"NO es un cuadrado magico :("<<endl;
+        }
+        break;
+    }
+    case 13:{
+        cout<<"Problema 13. Se tiene una fotografia digitalizada de una porcion de la galaxia NGC 1300 que esta ubicada a 61.000.000 de anos luz del planeta Tierra. La representacion digital de la imagen esta constituida por una matriz de numeros enteros; en la cual, cada uno representa la cantidad de luz en ese punto de la imagen, asi:"<<endl;
+        cout<<endl;
+        int matriz[]={0, 3, 4, 0, 0, 0, 6, 8, 5, 13, 6, 0, 0, 0, 2, 3, 2, 6, 2, 7, 3, 0, 10, 0, 0, 0, 4, 15, 4, 1, 6, 0, 0, 0, 7, 12, 6, 9, 10, 4, 5, 0, 6, 10, 6, 4, 8, 0};//(matriz modificable)
+        cout<<"el numero de estrellas en la fotografia es de "<<numeroEstrellas(matriz)<<endl;
+        break;
+    }
+    case 15:{
+        cout<<"Problema 15. Elabore un programa que permita hallar la interseccion entre un par de rectangulos. Represente los rectangulos como arreglos de 4 datos de la siguiente manera:"<<endl;
+        int rectangulo1[]={0,0,8,4};
+        int rectangulo2[]={5,2,6,7};
+        int cruce[4];
+        cruceRectangulos(rectangulo1, rectangulo2, cruce);
+        for(int i=0;i<4;i++){
+            cout<<cruce[i]<<" ";
+        }
+        cout<<endl;
+        break;
+    }
+    case 18:{
+        cout<<""<<endl;
 
         break;
     }
@@ -177,18 +211,118 @@ int romanoAArabigo(char* romano){
     numArabigo+=numeros[cantidadLetras-1];
     return numArabigo;
 }
-bool esMagico(char* matriz, int numElementos){
+bool esMagico(int* matriz, int numElementos){
     bool magico=true;
-    if(magico==true){
-        for(int i=0;i<numElementos;i++){
+    int numFilas=raizInt(numElementos);
+    int sumaMagica, sumaTemporal;
 
+    //imprimo la matriz
+    for(int i=0;i<numElementos;i++){
+        cout<<matriz[i];
+        if((i+1)%numFilas==0){
+            cout<<endl;
         }
     }
+    //hallo la suma magica
+    for(int i=0;i<3;i++){
+        sumaMagica+=matriz[i];
+    }
+    //verifico si es mágico
     if(magico==true){
+        for(int i=0;i<numElementos;i++){
+            sumaTemporal=0;
+            for(int j=0;j<3;j++){
+                sumaTemporal+=matriz[i];
+            }
+        }
+    }
+   /* if(magico==true){
 
     }
     if(magico==true){
 
-    }
+    }*/
     return magico;
+}
+int raizInt(int numero){
+    int raiz=1;
+    for(int i=0;i<numero;i++){
+        if(i*i==numero){
+            raiz=i;
+        }
+    }
+    return raiz;
+}
+int numeroEstrellas(int * vector){
+    int numEstrellas=0;
+    //creo la matriz y la relleno
+    int matriz[6][8];
+    for(int i=0;i<6;i++){
+        for(int j=0;j<8;j++){
+            matriz[i][j]=vector[8*i+j];
+        }
+    }
+    //busco estrellas
+    for(int i=0;i<6;i++){
+        for(int j=0;j<8;j++){
+            if(i>0&&i<5&&j>0&&j<7){//omito los bordes
+                if((matriz[i][j]+matriz[i][j-1]+matriz[i][j+1]+matriz[i-1][j]+matriz[i+1][j])/5>6){
+                    numEstrellas++;
+                }
+            }
+        }
+    }
+    return numEstrellas;
+}
+void cruceRectangulos(int * dato1, int * dato2, int * cruce){
+    //var para identificar si se sobreponen
+    bool interseccion=true;
+
+    //xi1 <= xi2 < xf1
+    if(dato1[0]<=dato2[0]&&dato2[0]<dato1[0]+dato1[2]){
+        cruce[0]=dato2[0];
+    }
+    //xi2 <= xi1< xf2
+    else if(dato2[0]<=dato1[0]&&dato1[0]<dato2[0]+dato2[2]){
+        cruce[0]=dato1[0];
+    }
+    //no están intersectados
+    else{
+        interseccion=false;
+    }
+
+    //yi1 >= yi2 > yf1
+    if(dato1[1]>=dato2[1]&&dato2[1]>dato1[1]-dato1[3]){
+        cruce[1]=dato2[1];
+    }
+    //yi2 >= yi1 > yf2
+    else if(dato2[1]>=dato1[1]&&dato1[1]>dato2[1]-dato2[3]){
+        cruce[1]=dato1[1];
+    }
+    //no están intersectados
+    else{
+        interseccion=false;
+    }
+
+    //límite de x
+    if(dato1[0]+dato1[2]>=dato2[0]+dato2[2]){
+        cruce[2]=dato2[0]+dato2[2]-cruce[0];
+    }
+    else if(dato1[0]+dato1[2]<dato2[0]+dato2[2]){
+        cruce[2]=dato1[0]+dato1[2]-cruce[0];
+    }
+
+    //límite de y
+    if(dato1[1]-dato1[3]<=dato2[1]-dato2[3]){
+        cruce[3]=abs(dato2[1]-dato2[3]-cruce[1]);//val abs, pq siempre va hacia abajo
+    }
+    else if(dato1[1]-dato1[3]>dato2[1]-dato2[3]){
+        cruce[3]=abs(dato1[1]-dato1[3]-cruce[1]);//val abs, pq siempre va hacia abajo
+    }
+    //no están intersectados
+    if(interseccion==false){
+        for(int i=0;i<4;i++){
+            cruce[i]=0;
+        }
+    }
 }
