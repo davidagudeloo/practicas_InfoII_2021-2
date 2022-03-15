@@ -12,8 +12,12 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLCDNumber>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -24,6 +28,18 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGraphicsView *graphicsView;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QLCDNumber *lcdVidas;
+    QLCDNumber *lcdTiempo;
+    QLCDNumber *lcdPuntaje;
+    QWidget *horizontalLayoutWidget_2;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *labelTiempo;
+    QLabel *labelVidas;
+    QLabel *labelPuntaje;
+    QPushButton *botonNuevoJuego;
+    QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -31,16 +47,76 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(655, 397);
+        MainWindow->resize(499, 317);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
-        graphicsView->setGeometry(QRect(0, 0, 621, 251));
+        graphicsView->setGeometry(QRect(0, 0, 497, 209));
+        horizontalLayoutWidget = new QWidget(centralwidget);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(10, 210, 211, 31));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        lcdVidas = new QLCDNumber(horizontalLayoutWidget);
+        lcdVidas->setObjectName(QString::fromUtf8("lcdVidas"));
+        lcdVidas->setEnabled(true);
+        QFont font;
+        font.setBold(false);
+        lcdVidas->setFont(font);
+        lcdVidas->setMouseTracking(false);
+        lcdVidas->setProperty("intValue", QVariant(0));
+
+        horizontalLayout->addWidget(lcdVidas);
+
+        lcdTiempo = new QLCDNumber(horizontalLayoutWidget);
+        lcdTiempo->setObjectName(QString::fromUtf8("lcdTiempo"));
+
+        horizontalLayout->addWidget(lcdTiempo);
+
+        lcdPuntaje = new QLCDNumber(horizontalLayoutWidget);
+        lcdPuntaje->setObjectName(QString::fromUtf8("lcdPuntaje"));
+
+        horizontalLayout->addWidget(lcdPuntaje);
+
+        horizontalLayoutWidget_2 = new QWidget(centralwidget);
+        horizontalLayoutWidget_2->setObjectName(QString::fromUtf8("horizontalLayoutWidget_2"));
+        horizontalLayoutWidget_2->setGeometry(QRect(20, 240, 201, 31));
+        horizontalLayout_2 = new QHBoxLayout(horizontalLayoutWidget_2);
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        labelTiempo = new QLabel(horizontalLayoutWidget_2);
+        labelTiempo->setObjectName(QString::fromUtf8("labelTiempo"));
+        QFont font1;
+        font1.setFamily(QString::fromUtf8("Bahnschrift Condensed"));
+        font1.setPointSize(14);
+        labelTiempo->setFont(font1);
+
+        horizontalLayout_2->addWidget(labelTiempo);
+
+        labelVidas = new QLabel(horizontalLayoutWidget_2);
+        labelVidas->setObjectName(QString::fromUtf8("labelVidas"));
+        labelVidas->setFont(font1);
+
+        horizontalLayout_2->addWidget(labelVidas);
+
+        labelPuntaje = new QLabel(horizontalLayoutWidget_2);
+        labelPuntaje->setObjectName(QString::fromUtf8("labelPuntaje"));
+        labelPuntaje->setFont(font1);
+
+        horizontalLayout_2->addWidget(labelPuntaje);
+
+        botonNuevoJuego = new QPushButton(centralwidget);
+        botonNuevoJuego->setObjectName(QString::fromUtf8("botonNuevoJuego"));
+        botonNuevoJuego->setGeometry(QRect(300, 230, 80, 21));
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(310, 260, 47, 13));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 655, 20));
+        menubar->setGeometry(QRect(0, 0, 499, 20));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -54,6 +130,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Bomberman", nullptr));
+        labelTiempo->setText(QCoreApplication::translate("MainWindow", "Vidas", nullptr));
+        labelVidas->setText(QCoreApplication::translate("MainWindow", "Tiempo", nullptr));
+        labelPuntaje->setText(QCoreApplication::translate("MainWindow", "Puntaje", nullptr));
+        botonNuevoJuego->setText(QCoreApplication::translate("MainWindow", "Nuevo juego", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     } // retranslateUi
 
 };

@@ -10,7 +10,11 @@ class Objetos : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
+    bool traspasable=false;
+    bool haceDano=false;
+    bool daPuntos=true;
     Objetos(QString name);
+    Objetos(QString name,int w, int h);
 };
 
 #endif // OBJETOS_H

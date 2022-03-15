@@ -110,8 +110,19 @@ compiler_rcc_clean:
 	-$(DEL_FILE) debug\qrc_Imagenes.cpp
 debug/qrc_Imagenes.cpp: ../juego/Imagenes.qrc \
 		C:/QT/6.0.2/mingw81_64/bin/rcc.exe \
-		../juego/Image/pared.png \
-		../juego/Image/Bomberman.png
+		../juego/Image/paredFuertepokemon.png \
+		../juego/Image/Bomberman.png \
+		../juego/Image/enemigo1.png \
+		../juego/Image/llave.png \
+		../juego/Image/gameover.png \
+		../juego/Image/puertaAbierta.png \
+		../juego/Image/bomba.png \
+		../juego/Image/win.gif \
+		../juego/Image/paredDebilpokemon.png \
+		../juego/Image/puertaCerrada.png \
+		../juego/Image/lose.gif \
+		../juego/Image/fondo.png \
+		../juego/Image/fuego1.png
 	C:\QT\6.0.2\mingw81_64\bin\rcc.exe -name Imagenes ..\juego\Imagenes.qrc -o debug\qrc_Imagenes.cpp
 
 compiler_moc_predefs_make_all: debug/moc_predefs.h
@@ -714,6 +725,16 @@ debug/mainwindow.o: ../juego/mainwindow.cpp ../juego/mainwindow.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qscrollarea.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qframe.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qboxlayout.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qlayout.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qgridlayout.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QLCDNumber \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qlcdnumber.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QLabel \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/QT/6.0.2/mingw81_64/include/QtGui/qpicture.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QMenuBar \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qmenubar.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qmenu.h \

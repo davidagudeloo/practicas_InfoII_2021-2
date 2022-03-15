@@ -22,19 +22,25 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    const uint offsetsAndSize[6];
-    char stringdata0[18];
+    const uint offsetsAndSize[14];
+    char stringdata0[99];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(offsetof(qt_meta_stringdata_MainWindow_t, stringdata0) + ofs), len 
 static const qt_meta_stringdata_MainWindow_t qt_meta_stringdata_MainWindow = {
     {
 QT_MOC_LITERAL(0, 10), // "MainWindow"
-QT_MOC_LITERAL(11, 5), // "mover"
-QT_MOC_LITERAL(17, 0) // ""
+QT_MOC_LITERAL(11, 13), // "moverEnemigos"
+QT_MOC_LITERAL(25, 0), // ""
+QT_MOC_LITERAL(26, 13), // "mostrarLlamas"
+QT_MOC_LITERAL(40, 14), // "eliminarLlamas"
+QT_MOC_LITERAL(55, 16), // "actualizarTiempo"
+QT_MOC_LITERAL(72, 26) // "on_botonNuevoJuego_clicked"
 
     },
-    "MainWindow\0mover\0"
+    "MainWindow\0moverEnemigos\0\0mostrarLlamas\0"
+    "eliminarLlamas\0actualizarTiempo\0"
+    "on_botonNuevoJuego_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -44,7 +50,7 @@ static const uint qt_meta_data_MainWindow[] = {
        9,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -52,9 +58,17 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   20,    2, 0x0a,    0 /* Public */,
+       1,    0,   44,    2, 0x0a,    0 /* Public */,
+       3,    0,   45,    2, 0x0a,    1 /* Public */,
+       4,    0,   46,    2, 0x0a,    2 /* Public */,
+       5,    0,   47,    2, 0x0a,    3 /* Public */,
+       6,    0,   48,    2, 0x08,    4 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -66,7 +80,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->mover(); break;
+        case 0: _t->moverEnemigos(); break;
+        case 1: _t->mostrarLlamas(); break;
+        case 2: _t->eliminarLlamas(); break;
+        case 3: _t->actualizarTiempo(); break;
+        case 4: _t->on_botonNuevoJuego_clicked(); break;
         default: ;
         }
     }
@@ -81,7 +99,7 @@ const QMetaObject MainWindow::staticMetaObject = { {
     nullptr,
 qt_incomplete_metaTypeArray<qt_meta_stringdata_MainWindow_t
 
-, QtPrivate::TypeAndForceComplete<void, std::false_type>
+, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>, QtPrivate::TypeAndForceComplete<void, std::false_type>
 
 
 >,
@@ -108,13 +126,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 5)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 1;
+        _id -= 5;
     }
     return _id;
 }
