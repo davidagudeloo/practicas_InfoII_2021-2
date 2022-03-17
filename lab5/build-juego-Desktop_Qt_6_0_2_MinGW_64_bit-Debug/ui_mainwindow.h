@@ -39,7 +39,6 @@ public:
     QLabel *labelVidas;
     QLabel *labelPuntaje;
     QPushButton *botonNuevoJuego;
-    QLabel *label;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -47,7 +46,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(499, 317);
+        MainWindow->resize(500, 293);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         graphicsView = new QGraphicsView(centralwidget);
@@ -109,14 +108,11 @@ public:
 
         botonNuevoJuego = new QPushButton(centralwidget);
         botonNuevoJuego->setObjectName(QString::fromUtf8("botonNuevoJuego"));
-        botonNuevoJuego->setGeometry(QRect(300, 230, 80, 21));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(310, 260, 47, 13));
+        botonNuevoJuego->setGeometry(QRect(390, 210, 101, 31));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 499, 20));
+        menubar->setGeometry(QRect(0, 0, 500, 20));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -133,8 +129,7 @@ public:
         labelTiempo->setText(QCoreApplication::translate("MainWindow", "Vidas", nullptr));
         labelVidas->setText(QCoreApplication::translate("MainWindow", "Tiempo", nullptr));
         labelPuntaje->setText(QCoreApplication::translate("MainWindow", "Puntaje", nullptr));
-        botonNuevoJuego->setText(QCoreApplication::translate("MainWindow", "Nuevo juego", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        botonNuevoJuego->setText(QCoreApplication::translate("MainWindow", "Jugar", nullptr));
     } // retranslateUi
 
 };

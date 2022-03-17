@@ -7,11 +7,12 @@
         <file>Image/enemigo1.png</file>
         <file>Image/fuego1.png</file>
         <file>Image/fondo.png</file>
-        <file>Image/gameover.png</file>
         <file>Image/llave.png</file>
         <file>Image/puertaAbierta.png</file>
         <file>Image/puertaCerrada.png</file>
         <file>Image/win.gif</file>
         <file>Image/lose.gif</file>
+        <file>Image/menu.png</file>
+        <file>Image/controles.png</file>
     </qresource>
 </RCC>

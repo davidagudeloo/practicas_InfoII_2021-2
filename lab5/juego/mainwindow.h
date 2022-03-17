@@ -25,6 +25,8 @@ public slots:
     void mostrarLlamas();
     void eliminarLlamas();
     void actualizarTiempo();
+
+
 public:
     void keyPressEvent(QKeyEvent * i);
     MainWindow(QWidget *parent = nullptr);
@@ -49,15 +51,20 @@ private:
     Objetos * fuegoBomba[5];
     Objetos * gameOver;
     Objetos * youWin;
+    Objetos * menu;
+    Objetos * controles;
     QTimer * tiempoLcd;
     QTimer * tiempo;
     QTimer * tiempoBomba;
     QTimer * tiempoFuego;
+
+
+
     bool bombaDisponible=true;
     bool hayLlave=false;
     bool hayPuerta=false;
     bool heroeTieneLlave=false;
-    bool finDelJuego=false;
+    bool finDelJuego=true;
     int vidas=3;
     int segundos=0;
     int puntaje=0;
@@ -78,5 +85,6 @@ private:
     void encuentroPuertaAbierta();
     void actualizarPuntaje();
     void jugarDeNuevo();
+    void mostrarMenu();
 };
 #endif // MAINWINDOW_H

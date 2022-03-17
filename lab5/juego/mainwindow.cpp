@@ -2,7 +2,6 @@
 #include "ui_mainwindow.h"
 
 
-
 /*Funcion mover enemigos
 -los mueve de forma aleatoria
 -verifica las colisiones con paredesfuertes, paredesdebiles y bombas
@@ -108,7 +107,7 @@ void MainWindow::keyPressEvent(QKeyEvent *i)
             encuentroLlave();
             encuentroPuertaAbierta();
         }
-        else if(i->key() == Qt::Key_Space){
+        else if(i->key() == Qt::Key_V){
             if(bombaDisponible){
                 bombaDisponible=false;
                 bomba = new Objetos(":/Image/bomba.png");
@@ -119,7 +118,6 @@ void MainWindow::keyPressEvent(QKeyEvent *i)
         }
     }
 }
-
 
 void MainWindow::mostrarLlamas()
 {
@@ -227,6 +225,8 @@ void MainWindow::actualizarTiempo()
     ui->lcdTiempo->display(segundos);
 }
 
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -244,111 +244,16 @@ MainWindow::MainWindow(QWidget *parent)
     tiempoFuego = new QTimer;
     connect(tiempoFuego, SIGNAL(timeout()),this, SLOT(eliminarLlamas()));
 
+
+//----------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
     escena = new QGraphicsScene;
-    fondo = new Objetos(":/Image/fondo.png",497,209);
-    fondo->setPos(0,0);
-    escena->addItem(fondo);
-
-    //hago el heroe
-    heroe = new Objetos(":/Image/Bomberman.png");
-    heroe->setPos(16,16);
-
-    //inicializo una bomba cualquiera
-    bomba = new Objetos(":/Image/bomba.png");
-    bomba->setPos(1000,1000);
-    escena->addItem(bomba);
-    tiempoBomba->start(1000);
-
-
-    //hago las paredes fuertes y debiles y dos enemigos
-    srand(time(NULL)); //inicializo la semilla aleatoria
-    for (int i=0, numFila=0, valorARestar=0, numEnemigos1=0;i<415;i++) {
-        pared[i] = new Objetos(":/Image/paredFuertepokemon.png",16,16);
-        paredDebil[i] = new Objetos(":/Image/paredDebilpokemon.png",16,16);
-        if((i+1)%32==0){
-            numFila=numFila+16;
-            valorARestar+=32;
-        }
-        if(i<31||i>=384||i-valorARestar==0||(i-valorARestar)*16>=480){
-            pared[i]->setPos((i-valorARestar)*16,numFila);
-        }
-        else if( (numFila/16)%2==0 && (i-valorARestar)%2==0 ){
-            pared[i]->setPos((i-valorARestar)*16,numFila);
-            if(numEnemigos1!=totalEnemigos1){
-                if((rand()%3+1)%2==0){
-                    if((rand()%3+1)%2==0){
-                        enemigos1[numEnemigos1] = new Objetos(":/Image/enemigo1.png");
-                        enemigos1[numEnemigos1]->haceDano=true;
-                        enemigos1[numEnemigos1]->setPos(pared[i]->x()+16,pared[i]->y());
-                        escena->addItem(enemigos1[numEnemigos1]);
-                        numEnemigos1++;
-                    }
-                }
-            }
-        }
-        else{
-            if((rand()%3+1)%2==0){
-                //crear llave
-                if(!hayLlave){
-                    if((rand()%3+1)%2==0){
-                        if((rand()%3+1)%2==0){
-                            if((rand()%3+1)%2==0){
-                                llave = new Objetos(":/Image/llave.png",12,12);
-                                llave->setPos((i-valorARestar)*16+2,numFila+2);
-                                //escena->addItem(llave);//key
-                                hayLlave=true;
-                            }
-                        }
-                    }
-                }
-                else if(!hayPuerta){
-                    if((rand()%3+1)%2==0){
-                        if(hayLlave){
-                            if((rand()%3+1)%2==0){
-                                puertaAbierta = new Objetos(":/Image/puertaAbierta.png",12,12);
-                                puertaCerrada = new Objetos(":/Image/puertaCerrada.png",12,12);
-                                puertaAbierta->setPos((i-valorARestar)*16+2,numFila+2);
-                                puertaCerrada->setPos((i-valorARestar)*16+2,numFila+2);
-                                //escena->addItem(puertaAbierta);//puerta
-                                //escena->addItem(puertaCerrada);//puerta
-                                hayPuerta=true;
-                            }
-                        }
-                    }
-                }
-                paredDebil[i]->setPos((i-valorARestar)*16,numFila);
-            }
-        }
-        escena->addItem(pared[i]);
-
-        if(paredDebil[i]->x()!=0 && !(paredDebil[i]->x()==32 && paredDebil[i]->y()==32)){
-            escena->addItem(paredDebil[i]);
-        }
-
-
-    }
-    if(!hayLlave || !hayPuerta || llave->collidesWithItem(puertaCerrada)){
-        escena->invalidate();
-        escena->update();
-    }
-    for(int i=33;i<36;i++){
-        paredDebil[i]->traspasable=true;
-        escena->removeItem(paredDebil[i]);
-    }
-
-    escena->addItem(llave);//key
-    escena->addItem(puertaAbierta);//puerta
-    escena->addItem(puertaCerrada);//puerta
-
-
     escena->setSceneRect(0,0,ui->graphicsView->width()-2, ui->graphicsView->height()-2);
-    escena->addItem(heroe);
-
     ui->graphicsView->setScene(escena);
-    ui->lcdVidas->display(vidas);
 
-    tiempo->start(300);//tiempo mov enemigos
-    tiempoLcd->start(1000);//tiempo de juego
+
+
+    mostrarMenu();
 
 }
 
@@ -369,6 +274,8 @@ MainWindow::~MainWindow()
     delete puertaCerrada;
     delete gameOver;
     delete youWin;
+    delete menu;
+    delete controles;
 }
 
 //funciones
@@ -465,6 +372,7 @@ void MainWindow::danoAlHeroe()
         tiempo->stop();
         finDelJuego=true;
         actualizarPuntaje();
+        ui->botonNuevoJuego->show();
     }
 }
 
@@ -494,6 +402,8 @@ void MainWindow::encuentroPuertaAbierta()
         tiempo->stop();
         finDelJuego=true;
         actualizarPuntaje();
+        ui->botonNuevoJuego->show();
+
 
     }
 }
@@ -526,7 +436,7 @@ void MainWindow::jugarDeNuevo()
 
 
 
-    escena = new QGraphicsScene;
+    //escena = new QGraphicsScene;
     fondo = new Objetos(":/Image/fondo.png",497,209);
     fondo->setPos(0,0);
     escena->addItem(fondo);
@@ -576,7 +486,7 @@ void MainWindow::jugarDeNuevo()
                             if((rand()%3+1)%2==0){
                                 llave = new Objetos(":/Image/llave.png",12,12);
                                 llave->setPos((i-valorARestar)*16+2,numFila+2);
-                                //escena->addItem(llave);//key
+                                escena->addItem(llave);//key
                                 hayLlave=true;
                             }
                         }
@@ -590,8 +500,8 @@ void MainWindow::jugarDeNuevo()
                                 puertaCerrada = new Objetos(":/Image/puertaCerrada.png",12,12);
                                 puertaAbierta->setPos((i-valorARestar)*16+2,numFila+2);
                                 puertaCerrada->setPos((i-valorARestar)*16+2,numFila+2);
-                                //escena->addItem(puertaAbierta);//puerta
-                                //escena->addItem(puertaCerrada);//puerta
+                                escena->addItem(puertaAbierta);//puerta
+                                escena->addItem(puertaCerrada);//puerta
                                 hayPuerta=true;
                             }
                         }
@@ -617,36 +527,53 @@ void MainWindow::jugarDeNuevo()
         escena->removeItem(paredDebil[i]);
     }
 
-    escena->addItem(llave);//key
+    /*escena->addItem(llave);//key
     escena->addItem(puertaAbierta);//puerta
-    escena->addItem(puertaCerrada);//puerta
+    escena->addItem(puertaCerrada);//puerta*/
 
 
-    escena->setSceneRect(0,0,ui->graphicsView->width()-2, ui->graphicsView->height()-2);
     escena->addItem(heroe);
 
-    ui->graphicsView->setScene(escena);
     ui->lcdVidas->display(vidas);
     ui->lcdPuntaje->display(puntaje);
     ui->lcdTiempo->display(segundos);
 
     tiempo->start(300);//tiempo mov enemigos
     tiempoLcd->start(1000);//tiempo de juego
+    if(!hayLlave){
+        jugarDeNuevo();
+    }
 }
 
+void MainWindow::mostrarMenu()
+{
+    menu = new Objetos(":/Image/menu.png",497,209);
+    menu->setPos(0,0);
+    escena->addItem(menu);
 
-
-
+    controles =new Objetos(":/Image/controles.png",210,100);
+    controles->setPos(150,120);
+    escena->addItem(controles);
+    ui->lcdPuntaje->hide();
+    ui->lcdTiempo->hide();
+    ui->lcdVidas->hide();
+    ui->labelPuntaje->hide();
+    ui->labelTiempo->hide();
+    ui->labelVidas->hide();
+}
 
 void MainWindow::on_botonNuevoJuego_clicked()
 {
     jugarDeNuevo();
 
-    ui->label->setText("hola");
+    ui->lcdPuntaje->show();
+    ui->lcdTiempo->show();
+    ui->lcdVidas->show();
+    ui->labelPuntaje->show();
+    ui->labelTiempo->show();
+    ui->labelVidas->show();
 
-    //ui->botonNuevoJuego->hide();
+    ui->botonNuevoJuego->setText("jugar de nuevo");
 
-
-
-
+    ui->botonNuevoJuego->hide();
 }

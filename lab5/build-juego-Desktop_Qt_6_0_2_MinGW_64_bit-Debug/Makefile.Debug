@@ -114,13 +114,14 @@ debug/qrc_Imagenes.cpp: ../juego/Imagenes.qrc \
 		../juego/Image/Bomberman.png \
 		../juego/Image/enemigo1.png \
 		../juego/Image/llave.png \
-		../juego/Image/gameover.png \
+		../juego/Image/controles.png \
 		../juego/Image/puertaAbierta.png \
 		../juego/Image/bomba.png \
 		../juego/Image/win.gif \
 		../juego/Image/paredDebilpokemon.png \
 		../juego/Image/puertaCerrada.png \
 		../juego/Image/lose.gif \
+		../juego/Image/menu.png \
 		../juego/Image/fondo.png \
 		../juego/Image/fuego1.png
 	C:\QT\6.0.2\mingw81_64\bin\rcc.exe -name Imagenes ..\juego\Imagenes.qrc -o debug\qrc_Imagenes.cpp
@@ -739,6 +740,9 @@ debug/mainwindow.o: ../juego/mainwindow.cpp ../juego/mainwindow.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qmenubar.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qmenu.h \
 		C:/QT/6.0.2/mingw81_64/include/QtGui/qaction.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QPushButton \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qpushbutton.h \
+		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qabstractbutton.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QStatusBar \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/qstatusbar.h \
 		C:/QT/6.0.2/mingw81_64/include/QtWidgets/QWidget
